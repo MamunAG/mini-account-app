@@ -1,8 +1,10 @@
 ﻿using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace mini_account_app.Models
 {
-    public class ChartOfAccounts
+    [Table("ChartOfAccounts")]
+    public class ChartOfAccount
     {
         public int Id { get; set; }
         [Required]

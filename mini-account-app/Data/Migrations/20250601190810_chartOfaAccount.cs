@@ -14,7 +14,7 @@ namespace mini_account_app.Data.Migrations
                 name: "UserToRoleMapping");
 
             migrationBuilder.CreateTable(
-                name: "ChartOfAccounts",
+                name: "ChartOfAccount",
                 columns: table => new
                 {
                     Id = table.Column<int>(type: "int", nullable: false)
@@ -32,7 +32,7 @@ namespace mini_account_app.Data.Migrations
         protected override void Down(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.DropTable(
-                name: "ChartOfAccounts");
+                name: "ChartOfAccount");
 
             migrationBuilder.CreateTable(
                 name: "UserToRoleMapping",

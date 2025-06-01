@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using mini_account_app.Data;
 
@@ -11,9 +12,11 @@ using mini_account_app.Data;
 namespace mini_account_app.Data.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20250601192421_voucherEntry")]
+    partial class voucherEntry
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -251,7 +254,7 @@ namespace mini_account_app.Data.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("ChartOfAccounts");
+                    b.ToTable("ChartOfAccount");
                 });
 
             modelBuilder.Entity("mini_account_app.Models.UserToModulePermission", b =>
@@ -294,9 +297,8 @@ namespace mini_account_app.Data.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<string>("VoucherType")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
+                    b.Property<int>("VoucherTypeId")
+                        .HasColumnType("int");
 
                     b.HasKey("Id");
 
@@ -327,8 +329,6 @@ namespace mini_account_app.Data.Migrations
                         .HasColumnType("int");
 
                     b.HasKey("Id");
-
-                    b.HasIndex("AccountTypeId");
 
                     b.HasIndex("VoucherEntryId");
 
@@ -406,17 +406,9 @@ namespace mini_account_app.Data.Migrations
 
             modelBuilder.Entity("mini_account_app.Models.VoucherEntryDetails", b =>
                 {
-                    b.HasOne("mini_account_app.Models.ChartOfAccount", "ChartOfAccounts")
-                        .WithMany()
-                        .HasForeignKey("AccountTypeId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
                     b.HasOne("mini_account_app.Models.VoucherEntry", null)
                         .WithMany("lstVoucherEntryDetails")
                         .HasForeignKey("VoucherEntryId");
-
-                    b.Navigation("ChartOfAccounts");
                 });
 
             modelBuilder.Entity("mini_account_app.Models.VoucherEntry", b =>

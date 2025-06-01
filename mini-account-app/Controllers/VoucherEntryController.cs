@@ -1,4 +1,7 @@
-﻿using Microsoft.AspNetCore.Authorization;
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
@@ -7,23 +10,22 @@ using mini_account_app.Models;
 
 namespace mini_account_app.Controllers
 {
-    [Authorize(Roles = "Admin,Accountant")]
-    public class ChartOfAccountController : Controller
+    public class VoucherEntryController : Controller
     {
         private readonly ApplicationDbContext _context;
 
-        public ChartOfAccountController(ApplicationDbContext context)
+        public VoucherEntryController(ApplicationDbContext context)
         {
             _context = context;
         }
 
-        // GET: ChartOfAccount
+        // GET: VoucherEntry
         public async Task<IActionResult> Index()
         {
-            return View(await _context.ChartOfAccounts.ToListAsync());
+            return View(await _context.VoucherEntry.ToListAsync());
         }
 
-        // GET: ChartOfAccount/Details/5
+        // GET: VoucherEntry/Details/5
         public async Task<IActionResult> Details(int? id)
         {
             if (id == null)
@@ -31,42 +33,42 @@ namespace mini_account_app.Controllers
                 return NotFound();
             }
 
-            var chartOfAccounts = await _context.ChartOfAccounts
+            var voucherEntry = await _context.VoucherEntry
                 .FirstOrDefaultAsync(m => m.Id == id);
-            if (chartOfAccounts == null)
+            if (voucherEntry == null)
             {
                 return NotFound();
             }
 
-            return View(chartOfAccounts);
+            return View(voucherEntry);
         }
 
-        // GET: ChartOfAccount/Create
+        // GET: VoucherEntry/Create
         public IActionResult Create()
         {
-            ViewBag.lstAccountType = ChartOfAccountsType.lstAccountType.Select(_ => new SelectListItem()
+            ViewBag.lstVoucherType = VoucherType.lstVoucherType.Select(_ => new SelectListItem()
             { Value = _, Text = _ });
 
             return View();
         }
 
-        // POST: ChartOfAccount/Create
+        // POST: VoucherEntry/Create
         // To protect from overposting attacks, enable the specific properties you want to bind to.
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("Id,AccountType,AccountName")] ChartOfAccount chartOfAccounts)
+        public async Task<IActionResult> Create([Bind("Id,VoucherNo,VoucherType,VoucherDate,ReferenceNo")] VoucherEntry voucherEntry)
         {
             if (ModelState.IsValid)
             {
-                _context.Add(chartOfAccounts);
+                _context.Add(voucherEntry);
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
             }
-            return View(chartOfAccounts);
+            return View(voucherEntry);
         }
 
-        // GET: ChartOfAccount/Edit/5
+        // GET: VoucherEntry/Edit/5
         public async Task<IActionResult> Edit(int? id)
         {
             if (id == null)
@@ -74,28 +76,22 @@ namespace mini_account_app.Controllers
                 return NotFound();
             }
 
-            var chartOfAccounts = await _context.ChartOfAccounts.FindAsync(id);
-            if (chartOfAccounts == null)
+            var voucherEntry = await _context.VoucherEntry.FindAsync(id);
+            if (voucherEntry == null)
             {
                 return NotFound();
             }
-
-            var lstAccountType = ChartOfAccountsType.lstAccountType.Select(_ => new SelectListItem()
-            { Value = _, Text = _ });
-
-            ViewData["lstAccountType"] = new SelectList(lstAccountType, "Value", "Text", chartOfAccounts.AccountType);
-
-            return View(chartOfAccounts);
+            return View(voucherEntry);
         }
 
-        // POST: ChartOfAccount/Edit/5
+        // POST: VoucherEntry/Edit/5
         // To protect from overposting attacks, enable the specific properties you want to bind to.
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("Id,AccountType,AccountName")] ChartOfAccount chartOfAccounts)
+        public async Task<IActionResult> Edit(int id, [Bind("Id,VoucherNo,VoucherType,VoucherDate,ReferenceNo")] VoucherEntry voucherEntry)
         {
-            if (id != chartOfAccounts.Id)
+            if (id != voucherEntry.Id)
             {
                 return NotFound();
             }
@@ -104,12 +100,12 @@ namespace mini_account_app.Controllers
             {
                 try
                 {
-                    _context.Update(chartOfAccounts);
+                    _context.Update(voucherEntry);
                     await _context.SaveChangesAsync();
                 }
                 catch (DbUpdateConcurrencyException)
                 {
-                    if (!ChartOfAccountsExists(chartOfAccounts.Id))
+                    if (!VoucherEntryExists(voucherEntry.Id))
                     {
                         return NotFound();
                     }
@@ -120,10 +116,10 @@ namespace mini_account_app.Controllers
                 }
                 return RedirectToAction(nameof(Index));
             }
-            return View(chartOfAccounts);
+            return View(voucherEntry);
         }
 
-        // GET: ChartOfAccount/Delete/5
+        // GET: VoucherEntry/Delete/5
         public async Task<IActionResult> Delete(int? id)
         {
             if (id == null)
@@ -131,34 +127,34 @@ namespace mini_account_app.Controllers
                 return NotFound();
             }
 
-            var chartOfAccounts = await _context.ChartOfAccounts
+            var voucherEntry = await _context.VoucherEntry
                 .FirstOrDefaultAsync(m => m.Id == id);
-            if (chartOfAccounts == null)
+            if (voucherEntry == null)
             {
                 return NotFound();
             }
 
-            return View(chartOfAccounts);
+            return View(voucherEntry);
         }
 
-        // POST: ChartOfAccount/Delete/5
+        // POST: VoucherEntry/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(int id)
         {
-            var chartOfAccounts = await _context.ChartOfAccounts.FindAsync(id);
-            if (chartOfAccounts != null)
+            var voucherEntry = await _context.VoucherEntry.FindAsync(id);
+            if (voucherEntry != null)
             {
-                _context.ChartOfAccounts.Remove(chartOfAccounts);
+                _context.VoucherEntry.Remove(voucherEntry);
             }
 
             await _context.SaveChangesAsync();
             return RedirectToAction(nameof(Index));
         }
 
-        private bool ChartOfAccountsExists(int id)
+        private bool VoucherEntryExists(int id)
         {
-            return _context.ChartOfAccounts.Any(e => e.Id == id);
+            return _context.VoucherEntry.Any(e => e.Id == id);
         }
     }
 }

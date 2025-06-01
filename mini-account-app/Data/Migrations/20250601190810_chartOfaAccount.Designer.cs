@@ -236,7 +236,7 @@ namespace mini_account_app.Data.Migrations
                     b.ToTable("AspNetUserTokens", (string)null);
                 });
 
-            modelBuilder.Entity("mini_account_app.Models.ChartOfAccounts", b =>
+            modelBuilder.Entity("mini_account_app.Models.ChartOfAccount", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -254,7 +254,7 @@ namespace mini_account_app.Data.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("ChartOfAccounts");
+                    b.ToTable("ChartOfAccount");
                 });
 
             modelBuilder.Entity("mini_account_app.Models.UserToModulePermission", b =>
