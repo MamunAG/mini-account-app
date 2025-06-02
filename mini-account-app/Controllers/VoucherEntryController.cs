@@ -44,12 +44,24 @@ namespace mini_account_app.Controllers
         }
 
         // GET: VoucherEntry/Create
-        public IActionResult Create()
+        public async Task<IActionResult> Create()
         {
+            var accounts = await _context.ChartOfAccounts.ToListAsync();
+
             ViewBag.lstVoucherType = VoucherType.lstVoucherType.Select(_ => new SelectListItem()
             { Value = _, Text = _ });
 
-            return View();
+            ViewBag.lstAccount = accounts.Select(_ => new SelectListItem()
+            { Value = _.Id.ToString(), Text = _.AccountType + ":: " + _.AccountName });
+
+            var data = new VoucherEntry();
+            data.lstVoucherEntryDetails = new List<VoucherEntryDetails>()
+            {
+                new VoucherEntryDetails(),
+                new VoucherEntryDetails()
+            };
+
+            return View(data);
         }
 
         // POST: VoucherEntry/Create
@@ -57,7 +69,7 @@ namespace mini_account_app.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("Id,VoucherNo,VoucherType,VoucherDate,ReferenceNo")] VoucherEntry voucherEntry)
+        public async Task<IActionResult> Create(VoucherEntry voucherEntry)
         {
             if (ModelState.IsValid)
             {
