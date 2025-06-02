@@ -35,7 +35,7 @@ namespace mini_account_app.Controllers
                 {
                     UserId = _.Id,
                     User = _.UserName,
-                    Roles = string.Join(",", roles.ToList())
+                    Roles = string.Join(", ", roles.ToList())
                 });
             }
 

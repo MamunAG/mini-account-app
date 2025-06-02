@@ -279,7 +279,7 @@ namespace mini_account_app.Data.Migrations
                     b.ToTable("UserToModulePermission");
                 });
 
-            modelBuilder.Entity("mini_account_app.Models.VoucherEntry", b =>
+            modelBuilder.Entity("mini_account_app.Models.VoucherEntryService", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -306,7 +306,7 @@ namespace mini_account_app.Data.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("VoucherEntry");
+                    b.ToTable("VoucherEntryService");
                 });
 
             modelBuilder.Entity("mini_account_app.Models.VoucherEntryDetails", b =>
@@ -415,7 +415,7 @@ namespace mini_account_app.Data.Migrations
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("mini_account_app.Models.VoucherEntry", "VoucherEntries")
+                    b.HasOne("mini_account_app.Models.VoucherEntryService", "VoucherEntries")
                         .WithMany("lstVoucherEntryDetails")
                         .HasForeignKey("MasterId")
                         .OnDelete(DeleteBehavior.Cascade)
@@ -426,7 +426,7 @@ namespace mini_account_app.Data.Migrations
                     b.Navigation("VoucherEntries");
                 });
 
-            modelBuilder.Entity("mini_account_app.Models.VoucherEntry", b =>
+            modelBuilder.Entity("mini_account_app.Models.VoucherEntryService", b =>
                 {
                     b.Navigation("lstVoucherEntryDetails");
                 });

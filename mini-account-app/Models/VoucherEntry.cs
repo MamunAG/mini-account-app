@@ -7,7 +7,7 @@ namespace mini_account_app.Models
     public class VoucherEntry
     {
         public int Id { get; set; }
-        
+
         [Required]
         [DisplayName("Voucher No.")]
         public string? VoucherNo { get; set; }
@@ -19,7 +19,7 @@ namespace mini_account_app.Models
 
         [Required]
         [DisplayName("Voucher Date")]
-        public DateTime VoucherDate { get; set; }= DateTime.Now;
+        public DateTime VoucherDate { get; set; } = DateTime.Now;
 
         [DisplayName("Reference No")]
         public string? ReferenceNo { get; set; }
@@ -29,8 +29,8 @@ namespace mini_account_app.Models
     public class VoucherEntryDetails
     {
         public int Id { get; set; }
-        
-        
+
+
         [ForeignKey(nameof(VoucherEntries))]
         public int MasterId { get; set; }
         public virtual VoucherEntry? VoucherEntries { get; set; }
@@ -57,6 +57,8 @@ namespace mini_account_app.Models
             }
         }
     }
+
+    public record NextVoucherNumber(string voucherNo, int serial);
 
 
 }

@@ -16,7 +16,7 @@ namespace mini_account_app.Data.Migrations
 
             migrationBuilder.DropColumn(
                 name: "VoucherTypeId",
-                table: "VoucherEntry");
+                table: "VoucherEntryService");
 
             migrationBuilder.RenameTable(
                 name: "ChartOfAccounts",
@@ -24,7 +24,7 @@ namespace mini_account_app.Data.Migrations
 
             migrationBuilder.AddColumn<string>(
                 name: "VoucherType",
-                table: "VoucherEntry",
+                table: "VoucherEntryService",
                 type: "nvarchar(max)",
                 nullable: false,
                 defaultValue: "");
@@ -65,7 +65,7 @@ namespace mini_account_app.Data.Migrations
 
             migrationBuilder.DropColumn(
                 name: "VoucherType",
-                table: "VoucherEntry");
+                table: "VoucherEntryService");
 
             migrationBuilder.RenameTable(
                 name: "ChartOfAccounts",
@@ -73,7 +73,7 @@ namespace mini_account_app.Data.Migrations
 
             migrationBuilder.AddColumn<int>(
                 name: "VoucherTypeId",
-                table: "VoucherEntry",
+                table: "VoucherEntryService",
                 type: "int",
                 nullable: false,
                 defaultValue: 0);

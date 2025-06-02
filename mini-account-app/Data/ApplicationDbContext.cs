@@ -15,5 +15,6 @@ namespace mini_account_app.Data
         public DbSet<mini_account_app.Models.UserToModulePermission> UserToModulePermission { get; set; } = default!;
         public DbSet<mini_account_app.Models.ChartOfAccount> ChartOfAccounts { get; set; } = default!;
         public DbSet<mini_account_app.Models.VoucherEntry> VoucherEntry { get; set; } = default!;
+        public DbSet<mini_account_app.Models.VoucherEntryDetails> VoucherEntryDetails { get; set; } = default!;
     }
 }

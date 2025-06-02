@@ -31,7 +31,7 @@ namespace mini_account_app.Data.Migrations
                 name: "FK_VoucherEntryDetails_VoucherEntry_MasterId",
                 table: "VoucherEntryDetails",
                 column: "MasterId",
-                principalTable: "VoucherEntry",
+                principalTable: "VoucherEntryService",
                 principalColumn: "Id",
                 onDelete: ReferentialAction.Cascade);
         }
@@ -62,7 +62,7 @@ namespace mini_account_app.Data.Migrations
                 name: "FK_VoucherEntryDetails_VoucherEntry_VoucherEntryId",
                 table: "VoucherEntryDetails",
                 column: "VoucherEntryId",
-                principalTable: "VoucherEntry",
+                principalTable: "VoucherEntryService",
                 principalColumn: "Id");
         }
     }

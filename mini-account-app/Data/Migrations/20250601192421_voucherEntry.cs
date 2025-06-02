@@ -12,7 +12,7 @@ namespace mini_account_app.Data.Migrations
         protected override void Up(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.CreateTable(
-                name: "VoucherEntry",
+                name: "VoucherEntryService",
                 columns: table => new
                 {
                     Id = table.Column<int>(type: "int", nullable: false)
@@ -45,7 +45,7 @@ namespace mini_account_app.Data.Migrations
                     table.ForeignKey(
                         name: "FK_VoucherEntryDetails_VoucherEntry_VoucherEntryId",
                         column: x => x.VoucherEntryId,
-                        principalTable: "VoucherEntry",
+                        principalTable: "VoucherEntryService",
                         principalColumn: "Id");
                 });
 
@@ -62,7 +62,7 @@ namespace mini_account_app.Data.Migrations
                 name: "VoucherEntryDetails");
 
             migrationBuilder.DropTable(
-                name: "VoucherEntry");
+                name: "VoucherEntryService");
         }
     }
 }

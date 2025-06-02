@@ -12,7 +12,7 @@ namespace mini_account_app.Data.Migrations
         {
             migrationBuilder.AddColumn<int>(
                 name: "VoucherSerial",
-                table: "VoucherEntry",
+                table: "VoucherEntryService",
                 type: "int",
                 nullable: false,
                 defaultValue: 0);
@@ -23,7 +23,7 @@ namespace mini_account_app.Data.Migrations
         {
             migrationBuilder.DropColumn(
                 name: "VoucherSerial",
-                table: "VoucherEntry");
+                table: "VoucherEntryService");
         }
     }
 }
